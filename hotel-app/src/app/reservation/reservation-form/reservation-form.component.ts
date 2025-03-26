@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ReservationService} from "../reservation.service";
 import {Reservation} from "../../models/reservation";
 import {ActivatedRoute, Router} from "@angular/router";
-import {futureDateValidator, roomNumberValidator} from "./custom-form-validators";
+import {checkOutAfterCheckInValidator, futureDateValidator, roomNumberValidator} from "./custom-form-validators";
 
 @Component({
   selector: 'app-reservation-form',
@@ -24,7 +24,7 @@ export class ReservationFormComponent implements OnInit {
   ngOnInit(): void {
     this.reservationForm = this.formBuilder.group({
       checkInDate: ['', [Validators.required, futureDateValidator()]],
-      checkOutDate: ['', Validators.required],
+      checkOutDate: ['', [Validators.required, checkOutAfterCheckInValidator('checkInDate')]],
       guestName: ['', Validators.required],
       guestEmail: ['', [Validators.required, Validators.email]],
       roomNumber: ['', [Validators.required, roomNumberValidator()]],

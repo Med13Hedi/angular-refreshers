@@ -15,6 +15,19 @@ export function futureDateValidator(): ValidatorFn {
   };
 }
 
+
+export function checkOutAfterCheckInValidator(checkInControlName: string): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const checkInDate = control.root.get(checkInControlName)?.value;
+    const checkOutDate = control.value;
+
+    if (checkInDate && checkOutDate && new Date(checkOutDate) <= new Date(checkInDate)) {
+      return { checkOutBeforeCheckIn: true };
+    }
+    return null;
+  };
+}
+
 export function roomNumberValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
     const value = control.value;

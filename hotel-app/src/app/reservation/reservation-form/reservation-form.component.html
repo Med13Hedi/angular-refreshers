@@ -26,9 +26,14 @@
       <label class="form-label">Check-Out Date:</label>
       <input class="form-control" type="date" formControlName="checkOutDate">
       <small class="text-danger"
-             *ngIf="reservationForm.get('checkOutDate')?.invalid && reservationForm.get('checkOutDate')?.touched"
+             *ngIf="reservationForm.get('checkOutDate')?.errors?.['required'] && reservationForm.get('checkOutDate')?.touched"
       >
         Check-Out Date is required
+      </small>
+      <small class="text-danger"
+             *ngIf="reservationForm.get('checkOutDate')?.errors?.['checkOutBeforeCheckIn'] && !reservationForm.get('checkOutDate')?.errors?.['required']"
+      >
+        Check-Out Date must be after the Check-In Date
       </small>
     </div>
   </div>
