@@ -11,9 +11,14 @@
       <label class="form-label">Check-In Date:</label>
       <input class="form-control" type="date" formControlName="checkInDate">
       <small class="text-danger"
-             *ngIf="reservationForm.get('checkInDate')?.invalid && reservationForm.get('checkInDate')?.touched"
+             *ngIf="reservationForm.get('checkInDate')?.errors?.['required'] && reservationForm.get('checkInDate')?.touched"
       >
         Check-In Date is required
+      </small>
+      <small class="text-danger"
+             *ngIf="reservationForm.get('checkInDate')?.errors?.['futureDateInvalid'] && !reservationForm.get('checkInDate')?.errors?.['required']"
+      >
+        Check-In Date must be today or in the future
       </small>
     </div>
 
