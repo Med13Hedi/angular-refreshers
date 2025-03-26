@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ReservationService} from "../reservation.service";
 import {Reservation} from "../../models/reservation";
-import {Router, ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {roomNumberValidator} from "./custom-form-validators";
 
 @Component({
   selector: 'app-reservation-form',
@@ -26,13 +27,13 @@ export class ReservationFormComponent implements OnInit {
       checkOutDate: ['', Validators.required],
       guestName: ['', Validators.required],
       guestEmail: ['', [Validators.required, Validators.email]],
-      roomNumber: ['', Validators.required],
+      roomNumber: ['', [Validators.required, roomNumberValidator()]],
     })
 
     let id = this.activatedRoute.snapshot.paramMap.get('id');
-    if (id){
+    if (id) {
       let reservation = this.reservationService.getReservation(id)
-      if (reservation){
+      if (reservation) {
         this.reservationForm.patchValue(reservation);
       }
     }
@@ -43,10 +44,10 @@ export class ReservationFormComponent implements OnInit {
       let reservation: Reservation = this.reservationForm.value;
       let id = this.activatedRoute.snapshot.paramMap.get('id');
 
-      if (id){
+      if (id) {
         reservation.id = id;
         this.reservationService.updateReservation(id, reservation)
-      }else {
+      } else {
         this.reservationService.addReservation(reservation);
       }
 

@@ -56,9 +56,14 @@
       <label class="form-label">Room Number:</label>
       <input class="form-control" type="number" formControlName="roomNumber">
       <small class="text-danger"
-             *ngIf="reservationForm.get('roomNumber')?.invalid && reservationForm.get('roomNumber')?.touched"
+             *ngIf="reservationForm.get('roomNumber')?.errors?.['required'] && reservationForm.get('roomNumber')?.touched"
       >
         Room Number is required
+      </small>
+      <small class="text-danger"
+             *ngIf="reservationForm.get('roomNumber')?.errors?.['roomNumberInvalid'] && !reservationForm.get('roomNumber')?.errors?.['required']"
+      >
+        Invalid room number
       </small>
     </div>
   </div>
