@@ -3,7 +3,7 @@ import {AddBook, RemoveBook} from "./book.actions";
 import {Book} from "../models/book";
 import {state} from "@angular/animations";
 
-export const initialState: ReadonlyArray<Book> = [];
+export const initialState: Book[] = [];
 
 export const BookReducer = createReducer(
   initialState,
