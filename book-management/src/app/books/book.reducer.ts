@@ -1,7 +1,6 @@
 import {createReducer, on} from "@ngrx/store";
 import {AddBook, RemoveBook} from "./book.actions";
 import {Book} from "../models/book";
-import {state} from "@angular/animations";
 
 export const initialState: Book[] = [];
 
