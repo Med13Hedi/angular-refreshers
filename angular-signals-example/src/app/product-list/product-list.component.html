@@ -1,0 +1,19 @@
+<p>product-list works!</p>
+
+
+<div>
+  <p>Price filter:</p>
+  <select (change)="changePriceFilterOperator($event)">
+    <option value="">None</option>
+    <option value=">=">>=</option>
+    <option value="<="><=</option>
+  </select>
+  <input type="number" (input)="changePriceFilterValue($event)" placeholder="Enter price value">
+</div>
+
+
+<ul>
+  <li *ngFor="let product of filteredProducts()">
+    {{product.name}} - {{product.price | currency:'USD'}}
+  </li>
+</ul>
